@@ -1,12 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
-interface UserInterface {
-  name: string;
-  email: string;
-  password_hash: string;
-  provider: boolean;
-}
 class User extends Model {
   id: string;
   name: string;
@@ -35,6 +29,10 @@ class User extends Model {
     });
 
     return this;
+  }
+
+  static associate(models): void {
+    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
   }
 
   checkPassword(password: string): Promise<boolean> {

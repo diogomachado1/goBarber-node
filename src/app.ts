@@ -1,6 +1,8 @@
 import express, { Application } from 'express';
 import routes from './routes';
 
+import './database';
+
 class App {
   public server: Application;
 

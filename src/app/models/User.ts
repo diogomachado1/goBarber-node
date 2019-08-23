@@ -32,7 +32,7 @@ class User extends Model {
   }
 
   static associate(models): void {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 
   checkPassword(password: string): Promise<boolean> {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import File from '../models/Files';
+import File from '../models/File';
 
 class FileController {
   async store(req: Request, res: Response): Promise<Response> {

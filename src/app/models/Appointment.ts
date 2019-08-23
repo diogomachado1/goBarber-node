@@ -1,6 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 
 class Appointment extends Model {
+  user_id: number;
   date: Date;
   canceled_at: Date;
   static init(sequelize): typeof Appointment {

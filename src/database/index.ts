@@ -5,13 +5,16 @@ import File from '../app/models/File';
 
 import databaseConfig from '../config/database';
 import Appointment from '../app/models/Appointment';
+import mongoose from 'mongoose';
 
 const models = [User, File, Appointment];
 
 class Database {
   public connection;
+  public mongoConnection;
   constructor() {
     this.init();
+    this.mongo();
   }
 
   init(): void {
@@ -22,6 +25,16 @@ class Database {
       .map(model => model.init(this.connection))
       //@ts-ignore
       .map(model => model.associate && model.associate(this.connection.models));
+  }
+
+  mongo(): void {
+    this.mongoConnection = mongoose.connect(
+      'mongodb://localhost:27017/gobarber',
+      {
+        useNewUrlParser: true,
+        useFindAndModify: true,
+      }
+    );
   }
 }
 

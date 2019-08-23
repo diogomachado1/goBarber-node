@@ -3,9 +3,11 @@ import User from './User';
 
 class Appointment extends Model {
   user_id: number;
+  provider_id: number;
+  user: User;
+  provider: User;
   date: Date;
   canceled_at: Date;
-  provider: User;
   static init(sequelize): typeof Appointment {
     //@ts-ignore
     super.init(

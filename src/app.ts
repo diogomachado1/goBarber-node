@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express, { Application } from 'express';
 import 'express-async-errors';
 import Youch from 'youch';
@@ -37,7 +39,7 @@ class App {
 
   exceptionHandler() {
     this.server.use(async (err, req, res, next) => {
-      if ('development' === 'development') {
+      if (process.env.NODE_ENV === 'development') {
         const errors = await new Youch(err, req).toJSON();
 
         return res.status(500).json(errors);

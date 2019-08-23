@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { promisify } from 'util';
 import jwt from 'jsonwebtoken';
 import { ReqId } from '../models/Types';
+import auth from '../../config/auth';
 
 interface Decoded {
   id?: number;
@@ -17,7 +18,7 @@ export default async (req: ReqId, res: Response, next): Promise<Response> => {
 
   const [, token] = authHeader.split(' ');
   try {
-    const decoded: Decoded = await promisify(jwt.verify)(token, 'test');
+    const decoded: Decoded = await promisify(jwt.verify)(token, auth.secret);
 
     req.userId = decoded.id;
 

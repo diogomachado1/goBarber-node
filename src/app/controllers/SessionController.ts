@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import * as Yup from 'yup';
 
 import User from '../models/User';
+import auth from '../../config/auth';
 
 class SessionController {
   async store(req: Request, res: Response): Promise<Response> {
@@ -37,8 +38,8 @@ class SessionController {
         name,
         email,
       },
-      token: jwt.sign({ id }, 'test', {
-        expiresIn: '7d',
+      token: jwt.sign({ id }, auth.secret, {
+        expiresIn: auth.expiresIn,
       }),
     });
   }
